@@ -12,7 +12,7 @@ $hook->set_hook('test');
 //set multiple hooks to which plugin developers can assign functions
 $hook->set_hooks(array('test1','test2', 'with_args', 'filter'));
 
-//load plugins from folder, if no argument is supplied, a './plugins/' constant will be used
+//load plugins from folder, if no argument is supplied, a 'plugins/' constant will be used
 //trailing slash at the end is REQUIRED!
 //this method will load all *.plugin.php files from given directory, INCLUDING subdirectories
 $hook->load_plugins();

@@ -1,5 +1,14 @@
 <?php
 
+/*
+Plugin Name: Plugin Withargs
+Plugin URI: http://www.instant-update.com/
+Description: This is plugin withargs
+Version: 1.0
+Author: Nemanja Avramovic
+Author URI: http://www.instant-update.com/
+*/
+
 //set plugin id as file name of plugin
 $plugin_id = basename(__FILE__);
 
@@ -21,4 +30,5 @@ add_hook('with_args','args');
 
 //code to execute when loading plugin
 echo "<p>Clock plugin LOADED!</p>";
+
 ?>

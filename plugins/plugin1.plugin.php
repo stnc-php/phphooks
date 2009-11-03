@@ -1,5 +1,15 @@
 <?php
 
+/*
+Plugin Name: Plugin1
+Plugin URI: http://www.instant-update.com/
+Description: This is plugin1
+Version: 1.0
+Author: Nemanja
+Author URI: http://www.instant-update.com/
+*/
+
+
 //set plugin id as file name of plugin
 $plugin_id = basename(__FILE__);
 
@@ -13,7 +23,7 @@ register_plugin($plugin_id, $data);
 
 //plugin function
 function testfunc() {
-	echo 'Plugin1 hooks on TEST, priority = default(10)<br />';
+	echo 'Plugin1 hooks into TEST, priority = default(10)<br />';
 }
 
 function filter2($url,$url1) {

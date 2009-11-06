@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Plugin2
-Plugin URI: http://www.avramtar.com/
+Plugin URI: http://code.google.com/p/phphooks/source/browse/trunk/plugins/plugin2/plugin2.plugin.php
 Description: This is plugin2
 Version: 1.0
-Author: Nemanja
-Author URI: http://www.avramtar.com/
+Author: Eric Wang
+Author URI: http://www.ericbess.com/
 */
 /*
  * a Class Structure to design plugin.
@@ -34,9 +34,9 @@ class plugin2 {
 		echo "Plugin2 hooks into TEST1<br />";
 	}
 	
-	function filter1($url, $url1) {
-		$return [] = "http://www.$url.com";
-		$return [] = "http://www.$url1.com";
+	function filter1($urls) {
+		$return [] = "http://www.$urls[0].com";
+		$return [] = "http://www.$urls[1].com";
 		return $return;
 	}
 }

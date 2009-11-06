@@ -2,11 +2,11 @@
 
 /*
 Plugin Name: Plugin1
-Plugin URI: http://www.instant-update.com/
+Plugin URI: http://code.google.com/p/phphooks/source/browse/trunk/plugins/plugin1.plugin.php
 Description: This is plugin1
 Version: 1.0
-Author: Nemanja
-Author URI: http://www.instant-update.com/
+Author: Eric Wang
+Author URI: http://www.ericbess.com/
 */
 
 
@@ -15,27 +15,27 @@ $plugin_id = basename(__FILE__);
 
 //some plugin data
 $data['name'] = "First plugin";
-$data['author'] = "Nemanja";
-$data['url'] = "http://www.instant-update.com/";
+$data['author'] = "eric wang";
+$data['url'] = "http://www.ericbess.com/";
 
 //register plugin data
 register_plugin($plugin_id, $data);
 
 //plugin function
-function testfunc() {
+function plugin1_testfunc() {
 	echo 'Plugin1 hooks into TEST, priority = default(10)<br />';
 }
 
-function filter2($url,$url1) {
-	$return[] = "$url:80/";
-	$return[] = "$url1:80/";
+function plugin1_filter2($urls) {
+	$return[] = "$urls[0]:80/";
+	$return[] = "$urls[1]:80/";
 	return $return;
 }
 
-add_hook('filter','filter2',7);
+add_hook('filter','plugin1_filter2',7);
 
 //add hook, where to execute a function
-add_hook('test','testfunc');
+add_hook('test','plugin1_testfunc');
 
 //code to execute when loading plugin
 echo "<p>Plugin 1 LOADED!</p>";

@@ -21,8 +21,8 @@ $data['url'] = "http://www.instant-update.com/";
 register_plugin($plugin_id, $data);
 
 //plugin function with argument(s) which are sent from application
-function args($name,$time) {
-	echo $name.date('H:i', $time)." h<br />";
+function args($time) {
+	echo "NOW:".date('H:i', $time)." h<br />";
 }
 
 //add hook, where to execute a function

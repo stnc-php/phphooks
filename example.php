@@ -38,8 +38,7 @@ echo "<p>some hardcoded stuff, 'with_args' hook following</p>";
 
 //execute hooks for "with_args" only if there are hooks to execute
 if ($hook->hook_exist ( 'with_args' )) {
-	$args = array ("Now:", time () );
-	$hook->execute_hook ( 'with_args', $args );
+	$hook->execute_hook ( 'with_args', time() );
 } else {
 	echo ('<p><p>no any plugin hooks on with_args!!!</p></p>');
 }
@@ -50,13 +49,12 @@ echo "<p>some hardcoded stuff, 'filter' hook following</p>";
 //execute hooks for "filter" only filter the $args and return its.
 
 
-$url = "ericbess";
-$url1 = "google";
+$urls[] = "ericbess";
+$urls[] = "google";
 
 if ($hook->hook_exist ( 'filter' )) {
-	$args = array ($url, $url1 );
-	echo 'Before filter:</br>' . $args [0] . '</br>' . $args [1] . '</br></br>';
-	$result = $hook->filter_hook ( 'filter', $args );
+	echo 'Before filter:</br>' . $urls [0] . '</br>' . $urls [1] . '</br></br>';
+	$result = $hook->filter_hook ( 'filter', $urls );
 	echo 'After filter:</br>' . $result [0] . '</br>' . $result [1] . '</br>';
 } else {
 	echo ('<p><p>no any plugin hooks on filter!!!</p></p>');

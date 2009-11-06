@@ -191,7 +191,7 @@ class phphooks {
 	 * @since 1.0
 	 * 
 	 * @param string $tag. The name of the hook.
-	 * @param array $args optional.The arguments the function accept (default none)
+	 * @param mix $args optional.The arguments the function accept (default none)
 	 * @return optional.
 	 */
 	function execute_hook($tag, $args = '') {
@@ -201,7 +201,7 @@ class phphooks {
 				if (isset ( $these_hooks [$i] )) {
 					foreach ( $these_hooks [$i] as $hook ) {
 						$args [] = $result;
-						$result = call_user_func_array ( $hook, $args );
+						$result = call_user_func ( $hook, $args );
 					}
 				}
 			}
@@ -217,7 +217,7 @@ class phphooks {
 	 * @since 1.0
 	 * 
 	 * @param string $tag. The name of the hook.
-	 * @param array $args optional.The arguments the function accept to filter(default none)
+	 * @param mix $args optional.The arguments the function accept to filter(default none)
 	 * @return array. The $args filter result.
 	 */
 	function filter_hook($tag, $args = '') {
@@ -228,7 +228,7 @@ class phphooks {
 				if (isset ( $these_hooks [$i] )) {
 					foreach ( $these_hooks [$i] as $hook ) {
 						$args = $result;
-						$result = call_user_func_array ( $hook, $args );
+						$result = call_user_func ( $hook, $args );
 					}
 				}
 			}

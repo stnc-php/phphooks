@@ -164,7 +164,7 @@ class phphooks {
 	 * 
 	 * @param string $tag. The name of the hook.
 	 * @param string $function. The function you wish to be called.
-	 * @param int $priority optional. Used to specify the order in which the functions associated with a particular action are executed.(range 0~20, 0 first call, 20 last call)
+	 * @param int $priority optional. Used to specify the order in which the functions associated with a particular action are executed (default: 10). Lower numbers correspond with earlier execution, and functions with the same priority are executed in the order in which they were added to the action.
 	 */
 	function add_hook($tag, $function, $priority = 10) {
 		if (! isset ( $this->hooks [$tag] )) {
@@ -197,12 +197,11 @@ class phphooks {
 	function execute_hook($tag, $args = '') {
 		if (isset ( $this->hooks [$tag] )) {
 			$these_hooks = $this->hooks [$tag];
-			for($i = 0; $i <= 20; $i ++) {
-				if (isset ( $these_hooks [$i] )) {
-					foreach ( $these_hooks [$i] as $hook ) {
-						$args [] = $result;
-						$result = call_user_func ( $hook, $args );
-					}
+			uksort ( $these_hooks, array($this, "my_sort") );
+			foreach ( $these_hooks as $hooks ) {
+				foreach ( $hooks as $hook ) {
+					$args [] = $result;
+					$result = call_user_func ( $hook, $args );
 				}
 			}
 			return $result;
@@ -224,12 +223,11 @@ class phphooks {
 		$result = $args;
 		if (isset ( $this->hooks [$tag] )) {
 			$these_hooks = $this->hooks [$tag];
-			for($i = 0; $i <= 20; $i ++) {
-				if (isset ( $these_hooks [$i] )) {
-					foreach ( $these_hooks [$i] as $hook ) {
-						$args = $result;
-						$result = call_user_func ( $hook, $args );
-					}
+			uksort ( $these_hooks, array($this, "my_sort") );
+			foreach ( $these_hooks as $hooks ) {
+				foreach ( $hooks as $hook ) {
+					$args = $result;
+					$result = call_user_func ( $hook, $args );
 				}
 			}
 			return $result;
@@ -251,5 +249,15 @@ class phphooks {
 			$this->plugins [$plugin_id] [$key] = $value;
 		}
 	}
+	
+	/**
+	 * sort hooks priority
+	 */
+	function my_sort($a, $b) {
+		if ($a == $b)
+			return 0;
+		return ($a < $b) ? - 1 : 1;
+	}
+	
 }
 ?>

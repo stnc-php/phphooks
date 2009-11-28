@@ -8,7 +8,7 @@
  * @license http://www.gnu.org/copyleft/lesser.html LGPL
  */
 define('PLUGINS_FOLDER', 'plugins/');
-class phphooks
+class Phphooks
 {
     /**
      * plugins option data

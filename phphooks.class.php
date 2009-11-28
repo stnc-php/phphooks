@@ -1,7 +1,7 @@
 <?php
 /**
  * @author eric.wzy@gmail.com
- * @version 1.1
+ * @version 1.1_lite
  * @package phphooks
  * @category Plugins
  * 
@@ -30,54 +30,6 @@ class Phphooks
      * @var array
      */
     var $hooks = array();
-    /**
-     * register hook name/tag, so plugin developers can attach functions to hooks
-     * @package phphooks
-     * @since 1.0
-     * 
-     * @param string $tag. The name of the hook.
-     */
-    function set_hook ($tag)
-    {
-        $this->hooks[$tag] = '';
-    }
-    /**
-     * register multiple hooks name/tag
-     * @package phphooks
-     * @since 1.0
-     * 
-     * @param array $tags. The name of the hooks.
-     */
-    function set_hooks ($tags)
-    {
-        foreach ($tags as $tag) {
-            $this->set_hook($tag);
-        }
-    }
-    /**
-     * write hook off
-     * @package phphooks
-     * @since 1.0
-     * 
-     * @param string $tag. The name of the hook.
-     */
-    function unset_hook ($tag)
-    {
-        unset($this->hooks[$tag]);
-    }
-    /**
-     * write multiple hooks off
-     * @package phphooks
-     * @since 1.0
-     * 
-     * @param array $tags. The name of the hooks.
-     */
-    function unset_hooks ($tags)
-    {
-        foreach ($tags as $tag) {
-            $this->developer_unset_hook($tag);
-        }
-    }
     /**
      * load plugins from specific folder, includes *.plugin.php files
      * @package phphooks
@@ -155,11 +107,7 @@ class Phphooks
      */
     function add_hook ($tag, $function, $priority = 10)
     {
-        if (! isset($this->hooks[$tag])) {
-            die("There is no such place ($tag) for hooks.");
-        } else {
-            $this->hooks[$tag][$priority][] = $function;
-        }
+        $this->hooks[$tag][$priority][] = $function;
     }
     /**
      * check whether any function is attached to hook
@@ -170,7 +118,7 @@ class Phphooks
      */
     function hook_exist ($tag)
     {
-        return (trim($this->hooks[$tag]) == "") ? false : true;
+        return isset($this->hooks[$tag]) ? true : false;
     }
     /**
      * execute all functions which are attached to hook, you can provide argument (or arguments via array)
@@ -182,16 +130,12 @@ class Phphooks
      */
     function execute_hook ($tag, $args = '')
     {
-        if (isset($this->hooks[$tag])) {
-            $these_hooks = $this->hooks[$tag];
-            uksort($these_hooks, array($this , "my_sort"));
-            foreach ($these_hooks as $hooks) {
-                foreach ($hooks as $hook) {
-                    call_user_func($hook, $args);
-                }
+        $these_hooks = $this->hooks[$tag];
+        uksort($these_hooks, array($this , "my_sort"));
+        foreach ($these_hooks as $hooks) {
+            foreach ($hooks as $hook) {
+                call_user_func($hook, $args);
             }
-        } else {
-            die("There is no such place ($tag) for hooks.");
         }
     }
     /**
@@ -205,18 +149,14 @@ class Phphooks
      */
     function filter_hook ($tag, $args)
     {
-        if (isset($this->hooks[$tag])) {
-            $these_hooks = $this->hooks[$tag];
-            uksort($these_hooks, array($this , "my_sort"));
-            foreach ($these_hooks as $hooks) {
-                foreach ($hooks as $hook) {
-                    $args = call_user_func($hook, $args);
-                }
+        $these_hooks = $this->hooks[$tag];
+        uksort($these_hooks, array($this , "my_sort"));
+        foreach ($these_hooks as $hooks) {
+            foreach ($hooks as $hook) {
+                $args = call_user_func($hook, $args);
             }
-            return $args;
-        } else {
-            die("There is no such place ($tag) for hooks.");
         }
+        return $args;
     }
     /**
      * register plugin data in $this->plugin
@@ -235,7 +175,7 @@ class Phphooks
     /**
      * sort hooks priority
      */
-    function my_sort ($a, $b)
+    private function my_sort ($a, $b)
     {
         if ($a == $b)
             return 0;

@@ -15,9 +15,9 @@ foreach ($result_rows as $result_rows)
     //unset means load all plugins in the plugin fold. set it, just load the plugins in this array.
 $hook->active_plugins = $plugins;
 //set hook to which plugin developers can assign functions
-$hook->set_hook('test');
+//$hook->set_hook ( 'test' );
 //set multiple hooks to which plugin developers can assign functions
-$hook->set_hooks(array('test1' , 'test2' , 'with_args' , 'filter'));
+//$hook->set_hooks ( array ('test1', 'test2', 'with_args', 'filter' ) );
 //load plugins from folder, if no argument is supplied, a 'plugins/' constant will be used
 //trailing slash at the end is REQUIRED!
 //this method will load all *.plugin.php files from given directory, INCLUDING subdirectories

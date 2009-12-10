@@ -39,7 +39,8 @@ class Phphooks
      */
     function set_hook ($tag)
     {
-        $this->hooks[$tag] = '';
+        $tag = trim($tag);
+        $this->hooks[$tag] = "";
     }
     /**
      * register multiple hooks name/tag
@@ -63,6 +64,7 @@ class Phphooks
      */
     function unset_hook ($tag)
     {
+        $tag = trim($tag);
         unset($this->hooks[$tag]);
     }
     /**
@@ -75,7 +77,7 @@ class Phphooks
     function unset_hooks ($tags)
     {
         foreach ($tags as $tag) {
-            $this->developer_unset_hook($tag);
+            $this->unset_hook($tag);
         }
     }
     /**
@@ -95,7 +97,7 @@ class Phphooks
                         $this->plugins[$file]['file'] = $file;
                     }
                 } else 
-                    if ((is_dir($from_folder . $file)) && ($file != '.') && ($file != '..')) {
+                    if ((is_dir($from_folder . $file)) && (substr($file,0,1) != '.')) {
                         $this->load_plugins($from_folder . $file . '/');
                     }
             }
@@ -136,7 +138,7 @@ class Phphooks
                         $this->plugins_header[] = $plugin_data;
                     }
                 } else 
-                    if ((is_dir($from_folder . $file)) && ($file != '.') && ($file != '..')) {
+                    if ((is_dir($from_folder . $file)) && (substr($file,0,1) != '.')) {
                         $this->get_plugins_header($from_folder . $file . '/');
                     }
             }
@@ -155,6 +157,7 @@ class Phphooks
      */
     function add_hook ($tag, $function, $priority = 10)
     {
+        $tag = trim($tag);
         if (! isset($this->hooks[$tag])) {
             die("There is no such place ($tag) for hooks.");
         } else {
@@ -170,7 +173,9 @@ class Phphooks
      */
     function hook_exist ($tag)
     {
-        return (trim($this->hooks[$tag]) == "") ? false : true;
+        $tag = trim($tag);
+        return ($this->hooks[$tag] == "") ? false : true;
+        
     }
     /**
      * execute all functions which are attached to hook, you can provide argument (or arguments via array)
@@ -182,6 +187,7 @@ class Phphooks
      */
     function execute_hook ($tag, $args = '')
     {
+        $tag = trim($tag);
         if (isset($this->hooks[$tag])) {
             $these_hooks = $this->hooks[$tag];
             uksort($these_hooks, array($this , "my_sort"));
@@ -205,6 +211,7 @@ class Phphooks
      */
     function filter_hook ($tag, $args)
     {
+        $tag = trim($tag);
         if (isset($this->hooks[$tag])) {
             $these_hooks = $this->hooks[$tag];
             uksort($these_hooks, array($this , "my_sort"));

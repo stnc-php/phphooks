@@ -47,7 +47,7 @@ class Phphooks
                         $this->plugins[$file]['file'] = $file;
                     }
                 } else 
-                    if ((is_dir($from_folder . $file)) && ($file != '.') && ($file != '..')) {
+                    if ((is_dir($from_folder . $file)) && (substr($file,0,1) != '.')) {
                         $this->load_plugins($from_folder . $file . '/');
                     }
             }
@@ -88,7 +88,7 @@ class Phphooks
                         $this->plugins_header[] = $plugin_data;
                     }
                 } else 
-                    if ((is_dir($from_folder . $file)) && ($file != '.') && ($file != '..')) {
+                    if ((is_dir($from_folder . $file)) && (substr($file,0,1) != '.')) {
                         $this->get_plugins_header($from_folder . $file . '/');
                     }
             }
@@ -107,6 +107,7 @@ class Phphooks
      */
     function add_hook ($tag, $function, $priority = 10)
     {
+        $tag = trim ($tag);
         $this->hooks[$tag][$priority][] = $function;
     }
     /**
@@ -118,6 +119,7 @@ class Phphooks
      */
     function hook_exist ($tag)
     {
+        $tag = trim ($tag);
         return isset($this->hooks[$tag]) ? true : false;
     }
     /**
@@ -130,6 +132,7 @@ class Phphooks
      */
     function execute_hook ($tag, $args = '')
     {
+        $tag = trim ($tag);
         $these_hooks = $this->hooks[$tag];
         uksort($these_hooks, array($this , "my_sort"));
         foreach ($these_hooks as $hooks) {
@@ -149,6 +152,7 @@ class Phphooks
      */
     function filter_hook ($tag, $args)
     {
+        $tag = trim ($tag);
         $these_hooks = $this->hooks[$tag];
         uksort($these_hooks, array($this , "my_sort"));
         foreach ($these_hooks as $hooks) {

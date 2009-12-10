@@ -1,14 +1,14 @@
 <?php
 /**
  * @author eric.wzy@gmail.com
- * @version 1.1
- * @package phphooks
- * @category Plugins
+ * @version 1.0.0
+ * @package Structures_Hook
+ * @category Structures
  * 
  * @license http://www.gnu.org/copyleft/lesser.html LGPL
  */
 define('PLUGINS_FOLDER', 'plugins/');
-class Phphooks
+class Hook
 {
     /**
      * plugins option data

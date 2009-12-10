@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.0.0" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+ <name>Structures_Hook</name>
+ <channel>pear.php.net</channel>
+ <summary>Hooks API, a plugin system solution</summary>
+ <description>Provide a way to load the plug-in scripts into hook which is embed in main scripts. This API can be used to setup and embed application plug-ins in similar way to how it is done in Wordpress Plugin API. </description>
+ <lead>
+  <name>Eric Wang</name>
+  <user>ericwang</user>
+  <email>eric.wzy@gmail.com</email>
+  <active>yes</active>
+ </lead>
+ <date>2009-12-07</date>
+ <time>15:15:35</time>
+ <version>
+  <release>1.0.0</release>
+  <api>1.0.0</api>
+ </version>
+ <stability>
+  <release>alpha</release>
+  <api>alpha</api>
+ </stability>
+ <license>LGPL</license>
+ <notes>http://www.gnu.org/copyleft/lesser.html</notes>
+ <contents>
+  <dir name="/">
+   <file name="hook.php" role="php" baseinstalldir="Structures" />
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>4.4.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.0b1</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <phprelease />
+ <changelog>
+  <release>
+   <version>
+    <release>1.0.0</release>
+    <api>1.0.0</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2009-12-07</date>
+   <license>LGPL</license>
+   <notes>http://www.gnu.org/copyleft/lesser.html</notes>
+  </release>
+ </changelog>
+</package>
